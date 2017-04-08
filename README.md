@@ -1,2 +1,3 @@
-# webgl-jumpflooding
-WebGL Implementation of Jump Flooding Algorithm
+# WebGL Jump Flooding Algorithm for Voronoi Diagrams
+
+This is a WebGL implementation of the Jump Flooding Algorithm by [Rong&Tan (2006)]{@link http://www.comp.nus.edu.sg/~tants/jfa.html} for Voronoi Diagrams. It is inspired by [Ryan Kaplan's blog]{@link http://rykap.com/graphics/skew/2016/02/25/voronoi-diagrams/} and its purpose is just for skilling...
