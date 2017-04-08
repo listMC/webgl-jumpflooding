@@ -107,7 +107,6 @@ function main(){
 			debugRender(gl2, canvas2, debugProgram, quadBuffer, originTexture);
 		initSeedTexture(gl2, canvas2, initProgram, quadBuffer);
 			debugRender(gl2, canvas2, debugProgram, quadBuffer, readTexture);
-		// readTexture = fbo.texture;
 
 		while (stepSize >= 1){
 			// run jumpFlood round
@@ -126,9 +125,9 @@ function main(){
 	});
 }
 /**
-	CREATE FRAMEBUFFER OBJECT
-	
-	@param: WebGL_Rendering_Context
+ *	CREATE FRAMEBUFFER OBJECT
+ *	
+ *	@param {WebGL_Rendering_Context} gl - WebGL context
 */
 function initFBO(gl){
 
@@ -145,7 +144,9 @@ function initFBO(gl){
 }
 
 /**
-	CHECK IF FBO IS CONFIGURED CORRECTLY
+ *	CHECK IF FBO IS CONFIGURED CORRECTLY
+ *
+ *	@param {WebGL_Rendering_Context} gl - WebGL context
 */
 function checkFBO(gl){
 	let e = gl.checkFramebufferStatus(gl.FRAMEBUFFER);
@@ -174,7 +175,7 @@ function checkFBO(gl){
 }
 
 /** 
-	CREATE EMPTY TEXTURE
+ *	CREATE EMPTY TEXTURE
 */
 function initEmptyTexture(gl, canvas){
 	let texture = gl.createTexture();
@@ -183,7 +184,6 @@ function initEmptyTexture(gl, canvas){
     gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
     gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST);
     gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.NEAREST);
-	// gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR); //<- das hatte ich ursprünglich allein stehen und damit hatte es geklappt
 	gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, canvas.width, canvas.height, 0, gl.RGBA, gl.UNSIGNED_BYTE, null);
 	gl.bindTexture(gl.TEXTURE_2D, null);
 	
@@ -200,12 +200,9 @@ function swapTextures(){
 
 
 /**
-	Could jumpFlood() be also recursive so that it calls itself everytime with the textures switched?
-	
-	- Ich glaube, das läuft nicht wenn ich die Texturen als Parameter übergebe. Ich muss ja die Texturen
-	  an sich updaten und deshalb muss ich wohl in dieser Funktion die globalen Variablen nehmen...
-	- Man muss wohl tatsächlich bei jeder Funktion den ARRAY_BUFFER erneut binden, weil nicht immer das quad gerendert wird,
-	  z.B. bei drawPointsToFBO, da werden Points gerendert. Das erfordert dann ein unbinding...
+ *	THE ACTUAL JUMP FLOOD CALL
+ *
+ *  @param {number} stepLength - The current step size.
 */
 function jumpFlood(gl, canvas, program, buffer, stepLength){
 	

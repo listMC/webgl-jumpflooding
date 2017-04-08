@@ -75,7 +75,7 @@
 			}
 			else {
 				// create invalid cell
-				gl_FragColor = vec4(0.0, 0.0, 1.0, 0.0);	// 25000 should cover a resolution even higher than 4K
+				gl_FragColor = vec4(0.0, 0.0, 1.0, 0.0);
 			}
 		}
 	</script>
@@ -194,7 +194,7 @@
 			if (object.z == 0.0) {
 				vec2 gridUv = decodePosition(object.xy) / u_Resolution;
 				//gridUv.y = 1. - gridUv.y;
-				gl_FragColor = /*vec4(1.0, 0.0, 0.0, 1.0);*/texture2D(u_SeedTexture, gridUv);
+				gl_FragColor = texture2D(u_SeedTexture, gridUv);
 			} 
 			else {
 				gl_FragColor = vec4(1.0, 1.0, 1.0, 1.0); // WHITE
